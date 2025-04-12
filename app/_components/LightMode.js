@@ -1,15 +1,9 @@
-import Image from "next/image";
-import lightMode from "@/public/moon-regular.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon } from "@fortawesome/free-regular-svg-icons";
 function LightMode() {
   return (
-    <div className="flex">
-      <Image
-        src={lightMode}
-        alt="light-mode"
-        className="mx-4"
-        width={20}
-        height={20}
-      />
+    <div className="text-2xl flex justify-center items-center">
+      <FontAwesomeIcon icon={faMoon} className="mx-2" />
       <p>Light Mode</p>
     </div>
   );
