@@ -2,7 +2,7 @@ function Filter() {
   return (
     <div>
       <select name="region" id="region" className="border">
-        <option value="" selected hidden>
+        <option value="" defaultValue hidden>
           Filter by Region
         </option>
         <option value="africa">Africa</option>
