@@ -10,7 +10,7 @@ function CountryItem({ country }) {
     population,
   } = country;
   return (
-    <Link className=" mx-5 mt-5" href={`/${name}`}>
+    <Link className=" mx-5 mt-5" href={`/country/${name}`}>
       <div className="relative aspect-16/10">
         <Image src={flag} alt={alt} fill className="object-cover" />
       </div>
