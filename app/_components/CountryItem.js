@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 function CountryItem({ country }) {
   const {
@@ -9,14 +10,9 @@ function CountryItem({ country }) {
     population,
   } = country;
   return (
-    <div className=" mx-5 mt-5">
+    <Link className=" mx-5 mt-5" href={`/${name}`}>
       <div className="relative aspect-16/10">
-        <Image
-          src={flag}
-          alt={alt}
-          fill
-          className="object-cover" /* className="object-cover" */
-        />
+        <Image src={flag} alt={alt} fill className="object-cover" />
       </div>
       <div className="py-5 ps-5 bg-blue-400">
         <p className="font-black text-xl mb-5">{name}</p>
@@ -30,7 +26,7 @@ function CountryItem({ country }) {
           <span className="font-bold">Capital:</span> {capital[0]}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }
 
