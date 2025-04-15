@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ButtonBack from "../../_components/ButtonBack";
+import BorderCountries from "@/app/_components/BorderCountries";
 
 async function page({ params }) {
   const { countryName } = await params;
@@ -37,22 +38,22 @@ async function page({ params }) {
           </div>
           <div>
             <p>
-              <span className="font-bold">Native Name:</span>Belgie
+              <span className="font-bold">Native Name: </span>Belgie
             </p>
             <p>
-              <span className="font-bold">Population:</span>
+              <span className="font-bold">Population: </span>
               {population}
             </p>
             <p>
-              <span className="font-bold">Region:</span>
+              <span className="font-bold">Region: </span>
               {region}
             </p>
             <p>
-              <span className="font-bold">Sub Region:</span>
+              <span className="font-bold">Sub Region: </span>
               {subregion}
             </p>
             <p>
-              <span className="font-bold">Capital:</span>
+              <span className="font-bold">Capital: </span>
               {capital}
             </p>
           </div>
@@ -74,12 +75,10 @@ async function page({ params }) {
                 (key, index) => `${index ? `, ` : ""}${languages[key]}`
               )}
             </p>
-            <p>
-              <span className="font-bold">Border Countries: </span>
-              {Object.keys(borders).map(
-                (key, index) => `${index ? `, ` : ""}${borders[key]}`
-              )}
-            </p>
+          </div>
+          <div>
+            <p className="font-bold">Border Countries: </p>
+            <BorderCountries countries={borders} />
           </div>
         </div>
       </div>
