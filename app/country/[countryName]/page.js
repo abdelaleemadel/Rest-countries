@@ -8,11 +8,10 @@ async function page({ params }) {
     `https://restcountries.com/v3.1/name/${countryName}?fullText=true&fields=name,tld,currencies,capital,region,subregion,languages,flags,borders,population`
   );
   let countryDetails = await data.json();
-  console.log(countryName, countryDetails);
   let {
     flags: { png: flag, alt },
-    name: { common: name },
-    nativeName,
+    name: { common: name, nativeName },
+
     tld,
     currencies,
     capital,
@@ -23,6 +22,7 @@ async function page({ params }) {
     borders,
   } = countryDetails[0];
 
+  const languagesKeys = Object.keys(languages);
   /*  `https://restcountries.com/v3.1/name/Belgium?fullText=true&fields=name,tld,currencies,capital,region,subregion,languages,flags,population` */
 
   return (
@@ -38,7 +38,8 @@ async function page({ params }) {
           </div>
           <div>
             <p>
-              <span className="font-bold">Native Name: </span>Belgie
+              <span className="font-bold">Native Name: </span>
+              {nativeName[languagesKeys[languagesKeys.length - 1]]["common"]}
             </p>
             <p>
               <span className="font-bold">Population: </span>
@@ -57,7 +58,6 @@ async function page({ params }) {
               {capital}
             </p>
           </div>
-
           <div>
             <p>
               <span className="font-bold">Top Level Domain: </span>
@@ -71,7 +71,7 @@ async function page({ params }) {
             </p>
             <p>
               <span className="font-bold">Languages: </span>
-              {Object.keys(languages).map(
+              {languagesKeys.map(
                 (key, index) => `${index ? `, ` : ""}${languages[key]}`
               )}
             </p>

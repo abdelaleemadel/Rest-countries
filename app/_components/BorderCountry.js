@@ -8,7 +8,6 @@ async function BorderCountry({ countryCode }) {
   const {
     name: { common: countryName },
   } = country;
-  console.log(country);
   return (
     <Link href={`/country/${countryName}`} className="border px-4 py-2">
       <p>{countryName}</p>
