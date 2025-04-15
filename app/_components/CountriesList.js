@@ -1,10 +1,6 @@
 import CountryItem from "./CountryItem";
 
-async function CountriesList({ region }) {
-  let data = await fetch(
-    "https://restcountries.com/v3.1/all?fields=name,population,capital,region,flags"
-  );
-  let countries = await data.json();
+async function CountriesList({ region, countries }) {
   let displayed;
   if (!region) region = "all";
   if (
