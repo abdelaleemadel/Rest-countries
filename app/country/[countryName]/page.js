@@ -42,7 +42,7 @@ async function page({ params }) {
             </p>
             <p>
               <span className="font-bold">Population: </span>
-              {population}
+              {population.toLocaleString()}
             </p>
             <p>
               <span className="font-bold">Region: </span>
