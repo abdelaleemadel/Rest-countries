@@ -4,11 +4,13 @@ import Search from "./_components/Search";
 import SearchFilterBar from "./_components/SearchFilterBar";
 import CountriesList from "./_components/CountriesList";
 
-export default function Home() {
+export default async function Home({ searchParams }) {
+  const { region } = await searchParams;
+  console.log(region);
   return (
     <>
       <SearchFilterBar />
-      <CountriesList />
+      <CountriesList region={region} />
     </>
   );
 }

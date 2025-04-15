@@ -1,13 +1,18 @@
 import CountryItem from "./CountryItem";
 
-async function CountriesList() {
-  let data = await fetch(
-    "https://restcountries.com/v3.1/all?fields=name,population,capital,region,flags"
-  );
+async function CountriesList({ region }) {
+  let link;
+  if (!region || region === "all") {
+    link =
+      "https://restcountries.com/v3.1/all?fields=name,population,capital,region,flags";
+  } else {
+    link = `https://restcountries.com/v3.1/region/${region}?fields=name,population,capital,region,flags`;
+  }
+  let data = await fetch(link);
   let countries = await data.json();
 
-  let displayed = [countries[0], countries[1], countries[2], countries[3]];
-  console.log();
+  let displayed = countries;
+  console.log(link);
   return (
     <div className="grid sm:grid-cols-1 px-10 mt-10 gap-8">
       {displayed &&
