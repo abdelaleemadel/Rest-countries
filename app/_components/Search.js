@@ -9,6 +9,7 @@ function Search() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
   function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -21,6 +22,7 @@ function Search() {
     }
     router.replace(`${pathname.toString()}?${params.toString()}`);
   }
+
   return (
     <form
       onSubmit={handleSubmit}

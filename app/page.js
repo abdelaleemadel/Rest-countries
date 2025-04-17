@@ -5,11 +5,17 @@ import SearchFilterBar from "./_components/SearchFilterBar";
 import CountriesList from "./_components/CountriesList";
 
 export default async function Home({ searchParams }) {
-  let data = await fetch(
-    "https://restcountries.com/v3.1/all?fields=name,population,capital,region,flags"
-  );
+  const { region, search } = await searchParams;
+
+  let link =
+    "https://restcountries.com/v3.1/all?fields=name,population,capital,region,flags";
+  if (search) {
+    link = `https://restcountries.com/v3.1/name/${search}?fields=name,population,capital,region,flags`;
+  }
+
+  let data = await fetch(link);
   let countries = await data.json();
-  const { region } = await searchParams;
+
   console.log(region);
   return (
     <>
