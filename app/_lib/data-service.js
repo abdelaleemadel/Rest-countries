@@ -20,8 +20,9 @@ async function getLocalCountries() {
 export async function getCountries() {
   let countries;
   try {
+    throw new Error("");
     let res = await fetch(
-      "https://restcountries.com/v3.11/all?fields=name,population,capital,region,flags"
+      "https://restcountries.com/v3.1/all?fields=name,population,capital,region,flags"
     );
     if (res.status == 404) throw new Error("not found");
     countries = await res.json();

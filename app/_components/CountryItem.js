@@ -17,7 +17,8 @@ function CountryItem({ country }) {
       <div className="py-5 ps-5 bg-blue-400">
         <p className="font-black text-xl mb-5">{name}</p>
         <p>
-          <span className="font-bold">Population:</span> {population}
+          <span className="font-bold">Population:</span>{" "}
+          {population.toLocaleString()}
         </p>
         <p>
           <span className="font-bold">Region:</span> {region}
