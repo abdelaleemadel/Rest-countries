@@ -3,8 +3,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: hsl(0, 0%, 98%);
+  --foreground: hsl(200, 15%, 8%);
+}
+
+@theme {
+  --color-dark-gray: hsl(0, 0%, 52%);
+  --color-dark-blue: hsl(209, 23%, 22%);
+  --color-very-dark: hsl(207, 26%, 17%);
 }
 
 @theme inline {
@@ -14,12 +20,6 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
   background: var(--background);
