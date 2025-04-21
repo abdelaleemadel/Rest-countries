@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 function Search() {
-  const p = 5;
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const defValue = searchParams.get("search") || "";
   function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -33,6 +33,7 @@ function Search() {
       </button>
       <input
         name="search"
+        defaultValue={defValue}
         className="w-[100%]"
         placeholder="search for a country..."
       />
