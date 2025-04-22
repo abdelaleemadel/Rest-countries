@@ -1,4 +1,3 @@
-"use server";
 async function getLocalCountries() {
   console.log("local");
   let res = await fetch("http://localhost:3000/data.json", {
