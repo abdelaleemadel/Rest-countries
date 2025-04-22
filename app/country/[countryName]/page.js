@@ -23,7 +23,6 @@ async function page({ params }) {
     population,
     borders,
   } = countryDetails[0];
-  console.log(countryDetails);
   const languagesKeys = Object.keys(languages);
   /*  `https://restcountries.com/v3.1/name/Belgium?fullText=true&fields=name,tld,currencies,capital,region,subregion,languages,flags,population` */
 
@@ -84,7 +83,7 @@ async function page({ params }) {
           </div>
           <div>
             <p className="font-bold">Border Countries: </p>
-            {/* <BorderCountries countries={borders} /> */}
+            <BorderCountries countries={borders} />
           </div>
         </div>
       </div>

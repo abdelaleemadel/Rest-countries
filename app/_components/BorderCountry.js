@@ -1,10 +1,8 @@
 import Link from "next/link";
+import { getBorderCountry } from "../_lib/data-service";
 
 async function BorderCountry({ countryCode }) {
-  let data = await fetch(
-    `https://restcountries.com/v3.1/alpha/${countryCode}?fields=name`
-  );
-  let country = await data.json();
+  let country = await getBorderCountry(countryCode);
   const {
     name: { common: countryName },
   } = country;

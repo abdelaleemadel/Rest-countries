@@ -1,4 +1,4 @@
-async function getLocalCountries(countryName) {
+async function getLocalCountries({ countryName, countryCode }) {
   console.log("local");
   let res = await fetch("http://localhost:3000/data.json", {
     cache: "force-cache",
@@ -7,7 +7,7 @@ async function getLocalCountries(countryName) {
   let countries = data;
   let localCountries;
   if (countryName) {
-    countries = data.filter((country) => country.name === countryName);
+    countries = [data.find((country) => country.name === countryName)];
     localCountries = countries.map((country) => {
       return {
         flags: { png: country.flags.png, alt: `The flag of ${country.name}` },
@@ -22,6 +22,9 @@ async function getLocalCountries(countryName) {
         currencies: country.currencies,
       };
     });
+  } else if (countryCode) {
+    let country = data.find((country) => countryCode === country.alpha3Code);
+    localCountries = { name: { common: country.name } };
   } else {
     localCountries = countries.map((country) => {
       return {
@@ -77,13 +80,29 @@ export async function searchCountries(input) {
 export async function getCountryDetails(countryName) {
   let country;
   try {
-    throw new Error("");
+    /* throw new Error(""); */
     let data = await fetch(
       `https://restcountries.com/v3.1/name/${countryName}?fullText=true&fields=name,tld,currencies,capital,region,subregion,languages,flags,borders,population`
     );
+    if (res.status != 200) throw new Error("not found");
     country = await data.json();
   } catch (error) {
-    country = await getLocalCountries(countryName);
+    country = await getLocalCountries({ countryName });
+  }
+  return country;
+}
+
+export async function getBorderCountry(countryCode) {
+  let country;
+  try {
+    /* throw new Error(""); */
+    let data = await fetch(
+      `https://restcountries.com/v3.1/alpha/${countryCode}?fields=name`
+    );
+    if (res.status != 200) throw new Error("not found");
+    country = await data.json();
+  } catch (error) {
+    country = await getLocalCountries({ countryCode });
   }
   return country;
 }
