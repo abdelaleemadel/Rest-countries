@@ -7,6 +7,7 @@ function Filter() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+  const defValue = searchParams.get("region") || "";
 
   function handleSelection(e) {
     const value = e.target.value;
@@ -15,6 +16,7 @@ function Filter() {
     router.replace(`${pathname}?${params.toString()}`);
     console.log(e.target.value);
   }
+
   return (
     <div>
       <select
@@ -22,6 +24,7 @@ function Filter() {
         id="region"
         onChange={handleSelection}
         className="border"
+        defaultValue={defValue}
       >
         <option value="" defaultValue hidden>
           Filter by Region
