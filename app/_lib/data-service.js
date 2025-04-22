@@ -1,18 +1,39 @@
-async function getLocalCountries() {
+async function getLocalCountries(countryName) {
   console.log("local");
   let res = await fetch("http://localhost:3000/data.json", {
     cache: "force-cache",
   });
   let data = await res.json();
-  let localCountries = data.map((country) => {
-    return {
-      flags: { png: country.flags.png, alt: `The flag of ${country.name}` },
-      name: { common: country.name },
-      capital: [country.capital],
-      population: country.population,
-      region: country.region,
-    };
-  });
+  let countries = data;
+  let localCountries;
+  if (countryName) {
+    countries = data.filter((country) => country.name === countryName);
+    localCountries = countries.map((country) => {
+      return {
+        flags: { png: country.flags.png, alt: `The flag of ${country.name}` },
+        name: { common: country.name, nativeName: country.nativeName },
+        capital: [country.capital],
+        population: country.population,
+        region: country.region,
+        tld: country.topLevelDomain,
+        subregion: country.subregion,
+        borders: country.borders,
+        languages: country.languages,
+        currencies: country.currencies,
+      };
+    });
+  } else {
+    localCountries = countries.map((country) => {
+      return {
+        flags: { png: country.flags.png, alt: `The flag of ${country.name}` },
+        name: { common: country.name },
+        capital: [country.capital],
+        population: country.population,
+        region: country.region,
+      };
+    });
+  }
+
   return localCountries;
 }
 
@@ -51,4 +72,18 @@ export async function searchCountries(input) {
   }
 
   return countries;
+}
+
+export async function getCountryDetails(countryName) {
+  let country;
+  try {
+    throw new Error("");
+    let data = await fetch(
+      `https://restcountries.com/v3.1/name/${countryName}?fullText=true&fields=name,tld,currencies,capital,region,subregion,languages,flags,borders,population`
+    );
+    country = await data.json();
+  } catch (error) {
+    country = await getLocalCountries(countryName);
+  }
+  return country;
 }

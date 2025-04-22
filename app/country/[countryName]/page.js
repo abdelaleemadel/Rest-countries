@@ -1,13 +1,15 @@
 import Image from "next/image";
 import ButtonBack from "../../_components/ButtonBack";
 import BorderCountries from "@/app/_components/BorderCountries";
+import { getCountryDetails } from "@/app/_lib/data-service";
 
 async function page({ params }) {
   const { countryName } = await params;
-  let data = await fetch(
+  /* let data = await fetch(
     `https://restcountries.com/v3.1/name/${countryName}?fullText=true&fields=name,tld,currencies,capital,region,subregion,languages,flags,borders,population`
   );
-  let countryDetails = await data.json();
+  let countryDetails = await data.json(); */
+  let countryDetails = await getCountryDetails(countryName);
   let {
     flags: { png: flag, alt },
     name: { common: name, nativeName },
@@ -21,7 +23,7 @@ async function page({ params }) {
     population,
     borders,
   } = countryDetails[0];
-
+  console.log(countryDetails);
   const languagesKeys = Object.keys(languages);
   /*  `https://restcountries.com/v3.1/name/Belgium?fullText=true&fields=name,tld,currencies,capital,region,subregion,languages,flags,population` */
 
@@ -39,7 +41,8 @@ async function page({ params }) {
           <div>
             <p>
               <span className="font-bold">Native Name: </span>
-              {nativeName[languagesKeys[languagesKeys.length - 1]]["common"]}
+              {nativeName[languagesKeys[languagesKeys.length - 1]]["common"] ||
+                nativeName}
             </p>
             <p>
               <span className="font-bold">Population: </span>
@@ -72,13 +75,16 @@ async function page({ params }) {
             <p>
               <span className="font-bold">Languages: </span>
               {languagesKeys.map(
-                (key, index) => `${index ? `, ` : ""}${languages[key]}`
+                (key, index) =>
+                  `${index ? `, ` : ""}${
+                    languages[key]["name"] || languages[key]
+                  }`
               )}
             </p>
           </div>
           <div>
             <p className="font-bold">Border Countries: </p>
-            <BorderCountries countries={borders} />
+            {/* <BorderCountries countries={borders} /> */}
           </div>
         </div>
       </div>
