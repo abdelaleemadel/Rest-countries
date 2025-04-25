@@ -3,7 +3,7 @@ import Search from "./Search";
 
 function SearchFilterBar() {
   return (
-    <div className="mx-5 flex justify-between">
+    <div className="max-w-9/10  mx-auto flex-wrap flex flex-col mt-10 gap-12">
       <Search />
       <Filter />
     </div>

@@ -16,9 +16,9 @@ export default async function Home({ searchParams }) {
   }
 
   return (
-    <>
+    <div className=" dark:bg-very-dark dark:text-white overflow-hidden">
       <SearchFilterBar />
       <CountriesList region={region} countries={countries} />
-    </>
+    </div>
   );
 }
