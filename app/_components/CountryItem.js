@@ -10,22 +10,28 @@ function CountryItem({ country }) {
     population,
   } = country;
   return (
-    <Link className=" mx-5 mt-5" href={`/country/${name}`}>
-      <div className="relative aspect-16/10">
+    <Link
+      className="rounded-lg shadow-lg  overflow-hidden"
+      href={`/country/${name}`}
+    >
+      <div className="relative aspect-165/100">
         <Image src={flag} alt={alt} fill className="object-cover" />
       </div>
-      <div className="py-5 ps-5 bg-blue-400">
-        <p className="font-black text-xl mb-5">{name}</p>
-        <p>
-          <span className="font-bold">Population:</span>{" "}
-          {population.toLocaleString()}
-        </p>
-        <p>
-          <span className="font-bold">Region:</span> {region}
-        </p>
-        <p>
-          <span className="font-bold">Capital:</span> {capital[0]}
-        </p>
+
+      <div className="ps-5  dark:bg-dark-blue  h-full pb-[10%] overflow-hidden">
+        <p className="font-black my-[8%] text-xl">{name}</p>
+        <div className=" leading-[200%] ">
+          <p>
+            <span className="font-semibold">Population:</span>{" "}
+            {population.toLocaleString()}
+          </p>
+          <p>
+            <span className="font-semibold">Region:</span> {region}
+          </p>
+          <p>
+            <span className="font-semibold">Capital:</span> {capital[0]}
+          </p>
+        </div>
       </div>
     </Link>
   );

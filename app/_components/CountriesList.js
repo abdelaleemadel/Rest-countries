@@ -17,7 +17,7 @@ async function CountriesList({ region, countries }) {
   }
 
   return (
-    <div className="grid sm:grid-cols-1 px-10 mt-10 gap-8">
+    <div className="grid pb-10 bottom-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-9/10 mx-auto mt-10 gap-14 justify-between px-[5%] sm:px-0">
       {displayed &&
         displayed.map((country) => (
           <CountryItem key={country.name.common} country={country} />

@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${nunitoSans.className} ${geistMono.variable} antialiased relative  `}
+        className={`${nunitoSans.className} ${geistMono.variable} antialiased relative min-h-dvh bg-background dark:bg-very-dark`}
       >
         <Header />
         <div className="pt-25">{children}</div>
