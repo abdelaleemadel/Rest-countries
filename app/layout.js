@@ -17,7 +17,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body
         className={`${nunitoSans.className} ${geistMono.variable} antialiased relative min-h-dvh bg-background dark:bg-very-dark`}
       >
