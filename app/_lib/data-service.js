@@ -55,7 +55,7 @@ export async function searchCountries(input) {
     country.name.common.toLowerCase().includes(input)
   );
 
-  return countries;
+  return resultCountries;
 }
 
 export async function getCountryDetails(countryName) {

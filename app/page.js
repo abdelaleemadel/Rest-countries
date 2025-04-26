@@ -8,10 +8,12 @@ import { getCountries, searchCountries } from "./_lib/data-service";
 export default async function Home({ searchParams }) {
   const { region, search } = await searchParams;
   let countries;
-
+  console.log(search);
   if (search) {
+    console.log("in search");
     countries = await searchCountries(search);
   } else {
+    console.log("no search");
     countries = await getCountries();
   }
 
