@@ -26,15 +26,18 @@ function Search() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex  card h-15 w-full bg-white rounded shadow-lg text-dark-gray dark:bg-dark-blue dark:text-white items-center p-1"
+      className="flex  h-15 w-full bg-white rounded shadow-lg text-dark-gray dark:bg-dark-blue dark:text-white items-center p-1 md:w-3/8 lg:w-3/8 xl:w-5/16 "
     >
-      <button>
-        <FontAwesomeIcon className="mx-7" size="lg" icon={faMagnifyingGlass} />
+      <button type="submit">
+        <FontAwesomeIcon
+          className="mx-7 md:max-lg:mx-4 text-xl md:max-lg:text-lg"
+          icon={faMagnifyingGlass}
+        />
       </button>
       <input
         name="search"
         defaultValue={defValue}
-        className="w-full h-full focus-visible:outline-none text-lg dark:placeholder:text-white"
+        className="w-full h-full focus-visible:outline-none text-lg md:max-lg:text-base dark:placeholder:text-white"
         placeholder="Search for a country..."
       />
     </form>
