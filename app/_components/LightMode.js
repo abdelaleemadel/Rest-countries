@@ -2,9 +2,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon } from "@fortawesome/free-regular-svg-icons";
 import { faMoon as solidMoon } from "@fortawesome/free-solid-svg-icons";
-
-import { useEffect, useState } from "react";
-import { getTheme, setCookies } from "../_lib/actions";
+import { setCookies } from "../_lib/actions";
 
 function LightMode() {
   async function handleToggle() {
