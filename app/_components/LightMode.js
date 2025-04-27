@@ -4,35 +4,27 @@ import { faMoon } from "@fortawesome/free-regular-svg-icons";
 import { faMoon as solidMoon } from "@fortawesome/free-solid-svg-icons";
 
 import { useEffect, useState } from "react";
+import { getTheme, setCookies } from "../_lib/actions";
+
 function LightMode() {
-  const [darkMode, setdarkMode] = useState(true);
-
-  function handleToggle() {
-    document.documentElement.classList.toggle("dark");
-    setdarkMode((prevMode) => !prevMode);
+  async function handleToggle() {
+    await setCookies();
   }
-  useEffect(() => {
-    const localMode = localStorage.getItem("dark");
-    if (localMode !== null && localMode === "false") {
-      handleToggle();
-    } else {
-      setdarkMode(true);
-    }
-  }, []);
 
-  useEffect(() => {
-    localStorage.setItem("dark", darkMode);
-  }, [darkMode]);
   return (
     <div
       className="text-lg   font-semibold flex justify-center items-center"
       onClick={handleToggle}
     >
-      {!darkMode ? (
+      <div className="dark:hidden">
         <FontAwesomeIcon icon={faMoon} className="mx-2 -rotate-35" />
-      ) : (
-        <FontAwesomeIcon icon={solidMoon} className="mx-2 -rotate-35" />
-      )}
+      </div>
+      <div className="hidden dark:block">
+        <FontAwesomeIcon
+          icon={solidMoon}
+          className="mx-2 hidden dark:block -rotate-35"
+        />
+      </div>
 
       <p>Dark Mode</p>
     </div>
