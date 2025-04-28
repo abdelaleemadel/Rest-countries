@@ -27,7 +27,7 @@ async function page({ params }) {
   /*  `https://restcountries.com/v3.1/name/Belgium?fullText=true&fields=name,tld,currencies,capital,region,subregion,languages,flags,population` */
 
   return (
-    <div className="container border-9 mx-auto px-10 dark:bg-amber-600">
+    <div className="mx-auto boder w-9/10">
       <ButtonBack />
       <div className="border mt-10">
         <div className="relative aspect-16/10">

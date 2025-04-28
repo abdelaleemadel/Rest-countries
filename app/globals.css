@@ -5,6 +5,7 @@
 :root {
   --background: hsl(0, 0%, 98%);
   --foreground: hsl(200, 15%, 8%);
+  --veryDark: hsl(207, 26%, 17%);
 }
 
 @theme {
