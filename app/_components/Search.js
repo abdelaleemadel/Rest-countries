@@ -36,6 +36,7 @@ function Search() {
       </button>
       <input
         name="search"
+        autoComplete="false"
         defaultValue={defValue}
         className="w-full h-full focus-visible:outline-none text-lg md:max-lg:text-base dark:placeholder:text-white"
         placeholder="Search for a country..."
