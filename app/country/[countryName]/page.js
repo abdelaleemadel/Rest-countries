@@ -5,10 +5,7 @@ import { getCountryDetails } from "@/app/_lib/data-service";
 
 async function page({ params }) {
   const { countryName } = await params;
-  /* let data = await fetch(
-    `https://restcountries.com/v3.1/name/${countryName}?fullText=true&fields=name,tld,currencies,capital,region,subregion,languages,flags,borders,population`
-  );
-  let countryDetails = await data.json(); */
+
   let countryDetails = await getCountryDetails(countryName);
   let {
     flags: { png: flag, alt },
@@ -24,7 +21,6 @@ async function page({ params }) {
     borders,
   } = countryDetails[0];
   const languagesKeys = Object.keys(languages);
-  /*  `https://restcountries.com/v3.1/name/Belgium?fullText=true&fields=name,tld,currencies,capital,region,subregion,languages,flags,population` */
   return (
     <div className="mx-auto  w-9/10 px-5 md:px-0">
       <ButtonBack />
@@ -39,8 +35,7 @@ async function page({ params }) {
           <div className="leading-9 text-lg">
             <p>
               <span className="font-semibold">Native Name: </span>
-              {nativeName[languagesKeys[languagesKeys.length - 1]]["common"] ||
-                nativeName}
+              {nativeName[languagesKeys[0]]["common"] || nativeName}
             </p>
             <p>
               <span className="font-semibold">Population: </span>
