@@ -24,59 +24,65 @@ async function page({ params }) {
   return (
     <div className="mx-auto  w-9/10 px-5 md:px-0">
       <ButtonBack />
-      <div className=" mt-20 dark:text-white">
-        <div className="relative aspect-16/10">
+      <div className="mt-20 dark:text-white xl:grid xl:grid-cols-2  xl:gap-20">
+        <div className="relative aspect-16/10 ">
           <Image src={flag} alt={alt} fill className="object-cover" />
         </div>
-        <div className="mt-5 py-5">
+        <div className="mt-5 py-5 xl:pt-0 ">
           <div>
-            <p className="text-4xl font-black my-5">{name}</p>
+            <p className="text-4xl font-black my-5 xl:mt-0">{name}</p>
           </div>
-          <div className="leading-9 text-lg">
-            <p>
-              <span className="font-semibold">Native Name: </span>
-              {nativeName[languagesKeys[0]]["common"] || nativeName}
-            </p>
-            <p>
-              <span className="font-semibold">Population: </span>
-              {population.toLocaleString()}
-            </p>
-            <p>
-              <span className="font-semibold">Region: </span>
-              {region}
-            </p>
-            <p>
-              <span className="font-semibold">Sub Region: </span>
-              {subregion}
-            </p>
-            <p>
-              <span className="font-semibold">Capital: </span>
-              {capital}
-            </p>
+          <div className="xl:flex gap-5">
+            <div className="leading-9 text-lg">
+              <p>
+                <span className="font-semibold">Native Name: </span>
+                {nativeName[languagesKeys[0]]["common"] || nativeName}
+              </p>
+              <p>
+                <span className="font-semibold">Population: </span>
+                {population.toLocaleString()}
+              </p>
+              <p>
+                <span className="font-semibold">Region: </span>
+                {region}
+              </p>
+              <p>
+                <span className="font-semibold">Sub Region: </span>
+                {subregion}
+              </p>
+              <p>
+                <span className="font-semibold">Capital: </span>
+                {capital}
+              </p>
+            </div>
+            <div className="leading-9 text-lg mt-10 xl:mt-0 ">
+              <p>
+                <span className="font-semibold">Top Level Domain: </span>
+                {tld[0]}
+              </p>
+              <p>
+                <span className="font-semibold">Currencies: </span>
+                {Object.keys(currencies).map(
+                  (key, index) =>
+                    `${index ? `, ` : ""}${currencies[key]["name"]}`
+                )}
+              </p>
+              <p>
+                <span className="font-semibold">Languages: </span>
+                {languagesKeys.map(
+                  (key, index) =>
+                    `${index ? `, ` : ""}${
+                      languages[key]["name"] || languages[key]
+                    }`
+                )}
+              </p>
+            </div>
           </div>
-          <div className="leading-9 text-lg mt-10">
-            <p>
-              <span className="font-semibold">Top Level Domain: </span>
-              {tld[0]}
+
+          <div className="mt-10 xl:flex xl:gap-5">
+            <p className="font-semibold text-xl mb-5 xl:text-nowrap ">
+              Border Countries:{" "}
             </p>
-            <p>
-              <span className="font-semibold">Currencies: </span>
-              {Object.keys(currencies).map(
-                (key, index) => `${index ? `, ` : ""}${currencies[key]["name"]}`
-              )}
-            </p>
-            <p>
-              <span className="font-semibold">Languages: </span>
-              {languagesKeys.map(
-                (key, index) =>
-                  `${index ? `, ` : ""}${
-                    languages[key]["name"] || languages[key]
-                  }`
-              )}
-            </p>
-          </div>
-          <div className="mt-10 ">
-            <p className="font-semibold text-xl mb-5">Border Countries: </p>
             <BorderCountries countries={borders} />
           </div>
         </div>
