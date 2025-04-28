@@ -10,3 +10,9 @@ export async function setCookies() {
   cookieStore.set("theme", theme);
   return theme;
 }
+
+export async function getCookies() {
+  const cookieStore = await cookies();
+  const theme = cookieStore.get("theme");
+  return theme?.value;
+}

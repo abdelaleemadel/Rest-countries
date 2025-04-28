@@ -2,12 +2,32 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon } from "@fortawesome/free-regular-svg-icons";
 import { faMoon as solidMoon } from "@fortawesome/free-solid-svg-icons";
-import { setCookies } from "../_lib/actions";
+import { getCookies, setCookies } from "../_lib/actions";
+import { useEffect, useState } from "react";
 
 function LightMode() {
+  const [mode, setMode] = useState("");
   async function handleToggle() {
+    if (mode === "light") {
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.add("dark");
+      setMode("dark");
+    } else if (mode === "dark") {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+      setMode("light");
+    }
     await setCookies();
   }
+
+  useEffect(() => {
+    async function getTheme() {
+      const theme = await getCookies();
+      let value = theme || "dark";
+      setMode(value);
+    }
+    getTheme();
+  }, []);
 
   return (
     <div
