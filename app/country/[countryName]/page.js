@@ -25,11 +25,10 @@ async function page({ params }) {
   } = countryDetails[0];
   const languagesKeys = Object.keys(languages);
   /*  `https://restcountries.com/v3.1/name/Belgium?fullText=true&fields=name,tld,currencies,capital,region,subregion,languages,flags,population` */
-
   return (
-    <div className="mx-auto boder w-9/10">
+    <div className="mx-auto  w-9/10 px-5 md:px-0">
       <ButtonBack />
-      <div className="border mt-10">
+      <div className=" mt-20 dark:text-white">
         <div className="relative aspect-16/10">
           <Image src={flag} alt={alt} fill className="object-cover" />
         </div>
@@ -37,42 +36,42 @@ async function page({ params }) {
           <div>
             <p className="text-4xl font-black my-5">{name}</p>
           </div>
-          <div>
+          <div className="leading-9 text-lg">
             <p>
-              <span className="font-bold">Native Name: </span>
+              <span className="font-semibold">Native Name: </span>
               {nativeName[languagesKeys[languagesKeys.length - 1]]["common"] ||
                 nativeName}
             </p>
             <p>
-              <span className="font-bold">Population: </span>
+              <span className="font-semibold">Population: </span>
               {population.toLocaleString()}
             </p>
             <p>
-              <span className="font-bold">Region: </span>
+              <span className="font-semibold">Region: </span>
               {region}
             </p>
             <p>
-              <span className="font-bold">Sub Region: </span>
+              <span className="font-semibold">Sub Region: </span>
               {subregion}
             </p>
             <p>
-              <span className="font-bold">Capital: </span>
+              <span className="font-semibold">Capital: </span>
               {capital}
             </p>
           </div>
-          <div>
+          <div className="leading-9 text-lg mt-10">
             <p>
-              <span className="font-bold">Top Level Domain: </span>
+              <span className="font-semibold">Top Level Domain: </span>
               {tld[0]}
             </p>
             <p>
-              <span className="font-bold">Currencies: </span>
+              <span className="font-semibold">Currencies: </span>
               {Object.keys(currencies).map(
                 (key, index) => `${index ? `, ` : ""}${currencies[key]["name"]}`
               )}
             </p>
             <p>
-              <span className="font-bold">Languages: </span>
+              <span className="font-semibold">Languages: </span>
               {languagesKeys.map(
                 (key, index) =>
                   `${index ? `, ` : ""}${
@@ -81,8 +80,8 @@ async function page({ params }) {
               )}
             </p>
           </div>
-          <div>
-            <p className="font-bold">Border Countries: </p>
+          <div className="mt-10 ">
+            <p className="font-semibold text-xl mb-5">Border Countries: </p>
             <BorderCountries countries={borders} />
           </div>
         </div>
