@@ -7,23 +7,23 @@ import { useEffect, useState } from "react";
 
 function LightMode() {
   const [mode, setMode] = useState("");
+
   async function handleToggle() {
-    if (mode === "light") {
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.add("dark");
-      setMode("dark");
-    } else if (mode === "dark") {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
-      setMode("light");
-    }
-    await setCookies();
+    const newMode = mode === "light" ? "dark" : "light";
+
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(newMode);
+
+    setMode(newMode);
+
+    document.cookie = `theme=${newMode}; path=/; max-age=31536000`;
   }
 
   useEffect(() => {
-    async function getTheme() {
-      const theme = await getCookies();
-      let value = theme || "dark";
+    function getTheme() {
+      const theme = document.cookie.match(/(?:^|; )theme=(dark|light)/);
+
+      let value = theme ? theme[1] : "dark";
       setMode(value);
     }
     getTheme();
@@ -31,7 +31,7 @@ function LightMode() {
 
   return (
     <div
-      className="text-lg   font-semibold flex justify-center items-center"
+      className="text-sm sm:text-lg   font-semibold flex justify-center items-center"
       onClick={handleToggle}
     >
       <div className="dark:hidden">
@@ -48,5 +48,4 @@ function LightMode() {
     </div>
   );
 }
-
 export default LightMode;
