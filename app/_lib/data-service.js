@@ -1,5 +1,7 @@
 async function getLocalCountries() {
-  let res = await fetch("http://localhost:3000/data.json", {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  console.log(baseUrl);
+  let res = await fetch(`${baseUrl}/data.json`, {
     cache: "force-cache",
   });
   let countries = await res.json();
