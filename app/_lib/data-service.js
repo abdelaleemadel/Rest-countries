@@ -28,7 +28,7 @@ async function getAllCountries() {
   let countries;
   try {
     let res = await fetch(
-      "https://restcountries.com/v3.1/all?fields=name,tld,currencies,capital,region,subregion,languages,flags,borders,population,cca3",
+      "https://restcountries.com/v3.1/all?fields=name,tld,currencies,capital,region,subregion,languages,flags,borders,population",
       { next: { revalidate: 86400 } }
     );
     if (res.status != 200) throw new Error("not found");
@@ -72,8 +72,16 @@ export async function getCountryDetails(countryName) {
 
 export async function getBorderCountry(countryCode) {
   const countries = await allCountries;
-
-  let country = countries.find((country) => country.cca3 === countryCode);
+  let country;
+  if (!countries[0].cca3) {
+    let res = await fetch(
+      `https://restcountries.com/v3.1/alpha/${countryCode}`
+    );
+    let countryArr = await res.json();
+    country = countryArr[0];
+  } else {
+    country = countries.find((country) => country.cca3 === countryCode);
+  }
 
   return { name: { common: country.name.common } };
 }
