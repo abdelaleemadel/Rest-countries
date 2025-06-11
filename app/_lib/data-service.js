@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 async function getLocalCountries() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   console.log(baseUrl);
@@ -67,6 +69,7 @@ export async function getCountryDetails(countryName) {
   const country = countries.find(
     (country) => country.name.common === countryName
   );
+  if (!country) return notFound();
   return [country];
 }
 
