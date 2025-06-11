@@ -31,7 +31,7 @@ function LightMode() {
 
   return (
     <div
-      className="text-sm sm:text-lg   font-semibold flex justify-center items-center"
+      className="text-sm sm:text-lg cursor-pointer  font-semibold flex justify-center items-center"
       onClick={handleToggle}
     >
       <div className="dark:hidden">
