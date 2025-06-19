@@ -15,6 +15,13 @@ const nextConfig = {
         port: "",
         pathname: "/wikipedia/commons/thumb/**",
       },
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+        port: "",
+        pathname: "**",
+        search: "",
+      },
     ],
   },
 };

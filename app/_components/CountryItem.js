@@ -15,7 +15,13 @@ function CountryItem({ country }) {
       href={`/country/${name}`}
     >
       <div className="relative aspect-165/100">
-        <Image src={flag} alt={alt} fill className="object-cover" />
+        <Image
+          src={flag}
+          alt={alt}
+          fill={true}
+          className="object-cover"
+          sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, (max-width:1279) 33vw, 25vw"
+        />
       </div>
 
       <div className="ps-5  dark:bg-dark-blue  h-full pb-[10%] overflow-hidden">
