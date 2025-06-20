@@ -26,7 +26,14 @@ async function page({ params }) {
       <ButtonBack />
       <div className="mt-20 dark:text-white xl:grid xl:grid-cols-2  xl:gap-20">
         <div className="relative aspect-16/10 ">
-          <Image src={flag} alt={alt} fill className="object-cover" />
+          <Image
+            src={flag}
+            alt={alt}
+            priority={true}
+            fill
+            className="object-cover"
+            sizes="(max-width: 1279px) 100vw, 50vw"
+          />
         </div>
         <div className="mt-5 py-5 xl:pt-0 ">
           <div>
