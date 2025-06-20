@@ -80,7 +80,7 @@ async function page({ params }) {
           </div>
 
           <div className="mt-10 xl:flex xl:gap-5">
-            <p className="font-semibold text-xl mb-5 xl:text-nowrap ">
+            <p className="font-semibold text-xl mb-5 xl:mb-0 xl:text-nowrap">
               Border Countries:{" "}
             </p>
             <BorderCountries countries={borders} />
