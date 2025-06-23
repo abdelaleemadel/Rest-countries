@@ -3,6 +3,13 @@ import ButtonBack from "../../_components/ButtonBack";
 import BorderCountries from "@/app/_components/BorderCountries";
 import { getCountryDetails } from "@/app/_lib/data-service";
 
+export async function generateMetadata({ params }) {
+  const { countryName } = await params;
+  return {
+    title: countryName,
+    description: `Learn about ${countryName}: population, region, subregion, capital, currencies, languages, and neighboring countries.`,
+  };
+}
 async function page({ params }) {
   const { countryName } = await params;
 

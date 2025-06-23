@@ -1,5 +1,9 @@
 import Link from "next/link";
-
+export const metadata = {
+  title: "Page Not Found",
+  description:
+    "Oops! The page you’re looking for doesn’t exist. Try searching for a country from the homepage.",
+};
 function NotFound() {
   return (
     <div className="my-32 text-center dark:bg-very-dark dark:text-white">
