@@ -8,22 +8,33 @@ function LightMode() {
   const [mode, setMode] = useState("");
 
   async function handleToggle() {
-    const newMode = mode === "light" ? "dark" : "light";
+    try {
+      const newMode = mode === "light" ? "dark" : "light";
 
-    document.documentElement.classList.remove("light", "dark");
-    document.documentElement.classList.add(newMode);
+      document.documentElement.classList.remove("light", "dark");
+      document.documentElement.classList.add(newMode);
 
-    setMode(newMode);
+      setMode(newMode);
 
-    document.cookie = `theme=${newMode}; path=/; max-age=31536000`;
+      document.cookie = `theme=${newMode}; path=/; max-age=31536000`;
+    } catch (error) {
+      console.error("Failed to toggle theme.", error);
+    }
   }
 
   useEffect(() => {
     function getTheme() {
-      const theme = document.cookie.match(/(?:^|; )theme=(dark|light)/);
+      try {
+        const theme = document.cookie.match(/(?:^|; )theme=(dark|light)/);
 
-      let value = theme ? theme[1] : "dark";
-      setMode(value);
+        const value = theme ? theme[1] : "dark";
+        if (value !== "dark" && value !== "light") {
+          throw new Error("Invalid theme");
+        }
+        setMode(value);
+      } catch (error) {
+        console.error("Failed to read or apply theme cookie:", error);
+      }
     }
     getTheme();
   }, []);
