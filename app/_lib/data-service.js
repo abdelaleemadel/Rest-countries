@@ -37,24 +37,27 @@ async function getAllCountries() {
     countries = await res.json();
     if (!countries) throw new Error("not found");
   } catch (error) {
-    console.log("localAll");
-
     countries = await getLocalCountries();
   }
+
   return countries;
 }
 
 const allCountries = getAllCountries();
 
 export async function getCountries() {
-  let countries = await allCountries;
-  return countries;
+  try {
+    let countries = await allCountries;
+    return countries;
+  } catch (error) {
+    console.error(error?.message);
+    return { error: "error" };
+  }
 }
 
 export async function searchCountries(input) {
   /*  */
   try {
-    input = 79;
     input = input.toLowerCase();
     const countries = await allCountries;
 
