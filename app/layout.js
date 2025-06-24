@@ -21,11 +21,17 @@ export const metadata = {
 };
 /* ${nunitoSans.className} ${geistMono.variable} */
 export default async function RootLayout({ children }) {
-  const cookiesStore = await cookies();
-  const theme = cookiesStore.get("theme");
+  let theme = "dark";
+  try {
+    const cookiesStore = await cookies();
+    const themeCookie = cookiesStore.get("theme");
+    theme = themeCookie?.value ?? "dark";
+  } catch (error) {
+    console.error("Failed to read cookies in RootLayout", error);
+  }
 
   return (
-    <html lang="en" className={theme?.value || "dark"}>
+    <html lang="en" className={theme}>
       <body
         className={`${nunitoSans.className} ${geistMono.variable} antialiased relative min-h-dvh bg-background dark:bg-very-dark`}
       >
