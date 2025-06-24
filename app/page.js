@@ -2,6 +2,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import SearchFilterBar from "./_components/SearchFilterBar";
 import CountriesList from "./_components/CountriesList";
 import { getCountries, searchCountries } from "./_lib/data-service";
+import Error from "./error";
 
 export async function generateMetadata({ searchParams }) {
   const { region, search } = await searchParams;
@@ -24,6 +25,7 @@ export async function generateMetadata({ searchParams }) {
     description,
   };
 }
+
 export default async function Home({ searchParams }) {
   const { region, search } = await searchParams;
   let countries;
@@ -36,7 +38,11 @@ export default async function Home({ searchParams }) {
   return (
     <div className=" dark:bg-very-dark dark:text-white overflow-hidden">
       <SearchFilterBar />
-      <CountriesList region={region} countries={countries} />
+      {countries?.error ? (
+        <Error />
+      ) : (
+        <CountriesList region={region} countries={countries} />
+      )}
     </div>
   );
 }

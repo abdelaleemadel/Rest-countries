@@ -2,6 +2,8 @@ import { Geist_Mono, Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "./_components/Header";
 import { cookies } from "next/headers";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import Error from "./error";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -35,8 +37,10 @@ export default async function RootLayout({ children }) {
       <body
         className={`${nunitoSans.className} ${geistMono.variable} antialiased relative min-h-dvh bg-background dark:bg-very-dark`}
       >
-        <Header />
-        <div className="pt-25">{children}</div>
+        <ErrorBoundary fallback={<Error />}>
+          <Header />
+          <div className="pt-25">{children}</div>
+        </ErrorBoundary>
       </body>
     </html>
   );

@@ -52,14 +52,21 @@ export async function getCountries() {
 }
 
 export async function searchCountries(input) {
-  input = input.toLowerCase();
-  const countries = await allCountries;
+  /*  */
+  try {
+    input = 79;
+    input = input.toLowerCase();
+    const countries = await allCountries;
 
-  let resultCountries = countries.filter((country) =>
-    country.name.common.toLowerCase().includes(input)
-  );
+    let resultCountries = countries.filter((country) =>
+      country.name.common.toLowerCase().includes(input)
+    );
 
-  return resultCountries;
+    return resultCountries;
+  } catch (error) {
+    console.error(error?.message);
+    return { error: "something is bad" };
+  }
 }
 
 export async function getCountryDetails(countryName) {
