@@ -2,7 +2,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon } from "@fortawesome/free-regular-svg-icons";
 import { faMoon as solidMoon } from "@fortawesome/free-solid-svg-icons";
-import { getCookies, setCookies } from "../_lib/actions";
 import { useEffect, useState } from "react";
 
 function LightMode() {
