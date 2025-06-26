@@ -22,23 +22,41 @@ function SearchFilterBar() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const search = formData.get("search");
-    const region = formData.get("region");
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (region) {
-      params.set("region", region);
-    } else {
-      params.delete("region");
+    const form = e.target;
+    if (!(form instanceof HTMLFormElement)) {
+      console.error("Submission faild: invalid form element");
+      return;
     }
-    if (search) {
-      params.set("search", search);
-    } else {
-      params.delete("search");
-    }
+    const formData = new FormData(form);
+    const search = (formData.get("search") || "").trim();
+    const region = (formData.get("region") || "").trim();
 
-    router.replace(`${pathname.toString()}?${params.toString()}`);
+    if (typeof search !== "string" || typeof region !== "string") {
+      console.error("Invalid form data");
+      return;
+    }
+    let params;
+    try {
+      params = new URLSearchParams(searchParams.toString());
+    } catch (err) {
+      console.error("Malformed search params", err);
+    }
+    try {
+      if (region) {
+        params.set("region", region);
+      } else {
+        params.delete("region");
+      }
+      if (search) {
+        params.set("search", search);
+      } else {
+        params.delete("search");
+      }
+
+      router.replace(`${pathname.toString()}?${params.toString()}`);
+    } catch (err) {
+      console.error("Failed to update the URL", err);
+    }
   }
 
   return (
@@ -70,7 +88,11 @@ function SearchFilterBar() {
           id="region"
           title="region"
           onChange={(e) => {
-            const form = e.currentTarget.form;
+            const form = e.currentTarget?.form;
+            if (!(form instanceof HTMLFormElement)) {
+              console.error("Invalid form element");
+              return;
+            }
             handleSubmit({ preventDefault: () => {}, target: form });
           }}
           className=" h-15 font-semibold dark:bg-dark-blue bg-white w-full appearance-none focus-visible:outline-none rounded-lg shadow-lg  px-5 md:max-lg:px-3"
