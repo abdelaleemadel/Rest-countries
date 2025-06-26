@@ -1,5 +1,3 @@
-import { notFound } from "next/navigation";
-
 async function getLocalCountries() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   console.log(baseUrl);
@@ -77,10 +75,9 @@ export async function getCountryDetails(countryName) {
   countryName =
     decodeURIComponent(countryName) /* countryName.replaceAll("%20", " ") */;
   const country = countries.find(
-    (country) => country.name.common === countryName
+    (country) => country.name.common.toLowerCase() === countryName.toLowerCase()
   );
-  if (!country) return notFound();
-  return [country];
+  return country ?? null;
 }
 
 export async function getBorderCountry(countryCode) {

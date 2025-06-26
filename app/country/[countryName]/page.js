@@ -2,18 +2,29 @@ import Image from "next/image";
 import ButtonBack from "../../_components/ButtonBack";
 import BorderCountries from "@/app/_components/BorderCountries";
 import { getCountryDetails } from "@/app/_lib/data-service";
+import { cache } from "react";
+import { notFound } from "next/navigation";
+
+const getCountry = cache(async (name) => {
+  if (!name) return null;
+  const countryDetails = await getCountryDetails(name);
+  return countryDetails;
+});
 
 export async function generateMetadata({ params }) {
-  const { countryName } = await params;
+  const country = await getCountry((await params).countryName);
+  if (!country) {
+    notFound();
+  }
+
   return {
-    title: countryName,
-    description: `Learn about ${countryName}: population, region, subregion, capital, currencies, languages, and neighboring countries.`,
+    title: country?.name?.common,
+    description: `Learn about ${country?.name?.common}: population, region, subregion, capital, currencies, languages, and neighboring countries.`,
   };
 }
 async function page({ params }) {
-  const { countryName } = await params;
-
-  let countryDetails = await getCountryDetails(countryName);
+  let countryDetails = await getCountry((await params).countryName);
+  if (!countryDetails) return;
   let {
     flags: { png: flag, alt },
     name: { common: name, nativeName },
@@ -26,7 +37,7 @@ async function page({ params }) {
     languages,
     population,
     borders,
-  } = countryDetails[0];
+  } = countryDetails;
   const languagesKeys = Object.keys(languages);
   return (
     <div className="mx-auto  w-9/10 px-5 md:px-0">
