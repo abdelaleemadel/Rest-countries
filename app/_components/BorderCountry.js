@@ -3,6 +3,7 @@ import { getBorderCountry } from "../_lib/data-service";
 
 async function BorderCountry({ countryCode }) {
   let country = await getBorderCountry(countryCode);
+  if (!country) return;
   const {
     name: { common: countryName },
   } = country;

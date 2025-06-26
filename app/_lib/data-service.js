@@ -92,6 +92,6 @@ export async function getBorderCountry(countryCode) {
   } else {
     country = countries.find((country) => country.cca3 === countryCode);
   }
-
+  if (!country) return null;
   return { name: { common: country.name.common } };
 }
