@@ -44,12 +44,11 @@ function SearchFilterBar() {
     const formData = new FormData(form);
     const search = (formData.get("search") || "").trim();
     const region = (formData.get("region") || "").trim();
-
     if (
       typeof search !== "string" ||
       typeof region !== "string" ||
       search.length > 20 ||
-      !regions.includes(region)
+      (region && !regions.includes(region))
     ) {
       console.error("Invalid form data");
       return null;
