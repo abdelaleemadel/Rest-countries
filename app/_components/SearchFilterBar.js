@@ -27,38 +27,50 @@ function SearchFilterBar() {
       console.error("Submission faild: invalid form element");
       return;
     }
-    const formData = new FormData(form);
-    const search = (formData.get("search") || "").trim();
-    const region = (formData.get("region") || "").trim();
 
-    if (typeof search !== "string" || typeof region !== "string") {
-      console.error("Invalid form data");
-      return;
-    }
-    let params;
+    const valid = validateFormInput(form);
+    if (!valid) return;
+
+    const { search, region } = valid;
     try {
-      params = new URLSearchParams(searchParams.toString());
-    } catch (err) {
-      console.error("Malformed search params", err);
-    }
-    try {
-      if (region) {
-        params.set("region", region);
-      } else {
-        params.delete("region");
-      }
-      if (search) {
-        params.set("search", search);
-      } else {
-        params.delete("search");
-      }
+      const params = updateQueryParams(searchParams, search, region);
 
       router.replace(`${pathname.toString()}?${params.toString()}`);
     } catch (err) {
       console.error("Failed to update the URL", err);
     }
   }
+  function validateFormInput(form) {
+    const formData = new FormData(form);
+    const search = (formData.get("search") || "").trim();
+    const region = (formData.get("region") || "").trim();
 
+    if (
+      typeof search !== "string" ||
+      typeof region !== "string" ||
+      search.length > 20 ||
+      !regions.includes(region)
+    ) {
+      console.error("Invalid form data");
+      return null;
+    }
+    return { search, region };
+  }
+  function updateQueryParams(searchParams, search, region) {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (region) {
+      params.set("region", region);
+    } else {
+      params.delete("region");
+    }
+    if (search) {
+      params.set("search", search);
+    } else {
+      params.delete("search");
+    }
+    return params;
+  }
   return (
     <form
       onSubmit={handleSubmit}
